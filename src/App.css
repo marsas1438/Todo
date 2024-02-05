@@ -47,12 +47,31 @@
 }
 
 .botonAgregar {
+  width: 200px;
+  margin: 0 auto;
+  border-radius: 5px;
+  text-align: center;
   color: white;
   background-color: green;
 }
 
+.botonAgregar button:disabled {
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.itemTeacher{
+  width: 400px;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .nombreLista {
-  width: 370px;
+  width: 200px;
   display: inline-table;
   align-items: center;
   justify-content: center;
