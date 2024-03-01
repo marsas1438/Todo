@@ -7,7 +7,7 @@ const GetTeacher = (teacher:Teacher)=>  {
     <section>
       <label className="itemTeacher"><strong>Nombre:</strong> {teacher.firstName} {teacher.surName} </label>
       <br />
-      <label className="itemTeacher"><strong>Fecha de nacimiento:</strong> {teacher.birthDate.toISOString().split('T')[0]} </label>
+      <label className="itemTeacher"><strong>Fecha de nacimiento:</strong> {new Date(teacher.birthDate).toISOString().split('T')[0]} </label>
       <br />
       <label className="itemTeacher"><strong>Género:</strong> {teacher.sex} </label>
       <br />

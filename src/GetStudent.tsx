@@ -13,7 +13,7 @@ const GetStudent = ({student,onDelete}:props)=>  {
       <hr></hr>
       <tr key={student.id}>
             <td className="nombreLista">{student.firstName} {student.surName}</td>
-            <td className="nombreLista">{student.birthDate.toISOString().split('T')[0]}</td>
+            <td className="nombreLista">{new Date(student.birthDate).toISOString().split('T')[0]}</td>
             <td className="nombreLista">{student.sex}</td>
             <td className="nombreLista">{student.career}</td>
             <td><button onClick={() => onDelete(student.id)} className="botonEliminar">Eliminar</button></td>

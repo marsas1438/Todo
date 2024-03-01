@@ -5,34 +5,60 @@ import GetStudent from './GetStudent'
 import CreateStudent from './CreateStudent'
 import data from './CommonData'
 import { Student } from './types/Student'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import GetTeacher from './GetTeacher'
+import { getStudents, createStudent, deleteStudent } from './services/StudentsService'
 
 function App() {
 
-  const [students, setStudents]  = useState(data.students);
+  const [students, setStudents]  = useState<Student[]>([]);
 
-  const maxStudent = students.reduce((maxStudent, currentStudent) => {
-    return currentStudent.id > maxStudent.id ? currentStudent : maxStudent;
-  }, students[0]);
+  const queryStudents = async () => {
+    try {
+      const dataStudents = await getStudents();
+      setStudents(dataStudents);
+    } catch (error) {
+      console.error('Error al cargar estudiantes:', error);
+    }
+  };
+
+  const createNewStudent = async (student: Student) => {
+    try {
+      const newStudent:Student={
+        id: 0,
+        career: student.career,
+        firstName: student.firstName,
+        surName: student.surName,
+        birthDate: student.birthDate,
+        sex: student.sex 
+      }
+      await createStudent(newStudent);
+      queryStudents();
+    } catch (error) {
+      console.error('Error al crear estudiante:', error);
+    }
+  };
+
+  const removeStudent = async (id: number) => {
+    try {
+      await deleteStudent(id);
+      queryStudents();
+    } catch (error) {
+      console.error('Error al crear estudiante:', error);
+    }
+  };
 
   const onDelete = (id: number) => {
-    const newStudents = students.filter((student:Student)=>student.id !== id)
-    setStudents(newStudents)
+    removeStudent(id)
   }
 
   const onSubmit = (student: Student) => {
-    const newStudent:Student={
-      id: maxStudent.id+1,
-      career: student.career,
-      firstName: student.firstName,
-      surName: student.surName,
-      birthDate: student.birthDate,
-      sex: student.sex 
-    }
-    //student.id = maxStudent.id+1;
-    setStudents([... students ,newStudent])
+    createNewStudent(student);
   }
+
+  useEffect(() => {
+    queryStudents();
+  }, []);
 
   return (
     

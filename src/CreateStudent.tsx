@@ -49,7 +49,7 @@ const CreateStudent = ({onSubmit}:props)=> {
           </label>
           <br />
           <label>
-            Fecha de Nacimiento: <input type="date" name="birthDate" value={student.birthDate.toISOString().split('T')[0]} onChange={handleDateChange} className="nombreAgregar"/>
+            Fecha de Nacimiento: <input type="date" name="birthDate" value={new Date(student.birthDate).toISOString().split('T')[0]} onChange={handleDateChange} className="nombreAgregar"/>
           </label>
           <br />
           <label>
